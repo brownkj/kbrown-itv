@@ -1,0 +1,3 @@
+class HubMainPage < BasePage
+  
+end
