@@ -37,20 +37,21 @@ Then(/^I should see available programmes$/) do
 end
 
 Then(/^only the first (\d+) programmes should be visible$/) do |programme_number|
-  (0..(programme_number.to_i-1)).each do |i|
+  @originally_visible = programme_number.to_i
+  (0..@originally_visible-1).each do |i|
     hub_category_page.programmes[i].wait_until_programme_image_visible
     hub_category_page.programmes[i].wait_until_programme_title_visible
     hub_category_page.programmes[i].wait_until_episode_count_visible
     hub_category_page.programmes[i].wait_until_programme_description_visible
   end
-  expect(hub_category_page.programmes[programme_number.to_i]).to have_no_programme_image
-  expect(hub_category_page.programmes[programme_number.to_i].programme_title).to_not be_visible
-  expect(hub_category_page.programmes[programme_number.to_i].episode_count).to_not be_visible
-  expect(hub_category_page.programmes[programme_number.to_i].programme_description).to_not be_visible
+  expect(hub_category_page.programmes[@originally_visible]).to have_no_programme_image
+  expect(hub_category_page.programmes[@originally_visible].programme_title).to_not be_visible
+  expect(hub_category_page.programmes[@originally_visible].episode_count).to_not be_visible
+  expect(hub_category_page.programmes[@originally_visible].programme_description).to_not be_visible
 end
 
 Then(/^more programmes should be visible$/) do
-  (0..11).each do |i|
+  (0..(@originally_visible+2)).each do |i|
     hub_category_page.programmes[i].wait_until_programme_image_visible
     hub_category_page.programmes[i].wait_until_programme_title_visible
     hub_category_page.programmes[i].wait_until_episode_count_visible

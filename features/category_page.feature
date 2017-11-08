@@ -16,7 +16,7 @@ And I should see the category heading
 And I should see available programmes
 
 Scenario: Programme lazy loading
-Then only the first 6 programmes should be visible
+Then only the first 3 programmes should be visible
 When I scroll down 
 Then more programmes should be visible
 When I scroll to the bottom
